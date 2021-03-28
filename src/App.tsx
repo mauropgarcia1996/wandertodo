@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Todos from "./components/todos/Todos";
 import Sidebar from "./components/Sidebar";
 
-const Home = () => {
+const Home: React.FunctionComponent = () => {
   return <div>Welcome!</div>;
 };
-const Login = () => {
+const Login: React.FunctionComponent = () => {
   return <div>Login</div>;
 };
 
