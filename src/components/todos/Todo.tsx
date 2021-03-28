@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ProviderProps } from "react";
 
 interface ItemProps {
   name: string;
@@ -6,7 +6,7 @@ interface ItemProps {
   done: boolean;
 }
 
-const Todo = (props: ItemProps) => {
+const Todo: React.FunctionComponent<ItemProps> = (props: ItemProps) => {
   return (
     <div className="todo-item grid grid-cols-12 w-full py-2 rounded-3xl shadow-lg my-2">
       <div className="col-span-2 flex justify-center items-center">

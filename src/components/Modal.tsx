@@ -5,7 +5,7 @@ interface ModalProps {
   setShowModal: (state: boolean) => void;
   addData: (e: FormEvent, name: string, description: string) => void;
 }
-const Modal = (props: ModalProps) => {
+const Modal: React.FunctionComponent<ModalProps> = (props: ModalProps) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   return (
@@ -61,7 +61,11 @@ const Modal = (props: ModalProps) => {
               className="px-1 py-1 rounded-lg bg-gray-100 outline-none text-sm"
               onChange={(e) => setDescription(e.target.value)}
             />
-            <button type="submit">Submit</button>
+            <div className="flex justify-center py-5">
+              <button className="w-1/2 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 hover:shadow-md text-gray-50" type="submit">
+                Submit
+              </button>
+            </div>
           </form>
         </div>
       </div>
