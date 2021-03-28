@@ -1,4 +1,4 @@
-import React, { ProviderProps } from "react";
+import React from "react";
 
 interface ItemProps {
   name: string;
