@@ -1,6 +1,6 @@
 # wandertodo
 
-### [Check out the demo here](www.notavailableyet.com)
+### [Check out the demo here](https://sleepy-brown-d2a7a4.netlify.app/)
 
 ## About ⭐️
 
