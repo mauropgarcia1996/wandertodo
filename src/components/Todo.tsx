@@ -2,6 +2,7 @@ import React from "react";
 
 interface ItemProps {
   name: string;
+  description: string;
   done: boolean;
 }
 
@@ -44,14 +45,7 @@ const Todo = (props: ItemProps) => {
       <div className="col-span-10 grid grid-cols-12">
         <div className="col-span-10">
           <p className="text-xl font-medium">{props.name}</p>
-          <p className="text-xs">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut placerat
-            quis id sit ac feugiat quis nec amet. Vel donec nulla mi
-            pellentesque pharetra a. Molestie suscipit et pellentesque hac eu.
-            Ullamcorper consequat, justo, pellentesque nec fermentum aliquam
-            morbi. Enim risus sed vulputate vulputate eget risus aliquet.
-            Suspendisse.
-          </p>
+          <p className="text-xs">{props.description}</p>
         </div>
         <div className="col-span-2">
           <div className="flex items-center justify-between mx-4">
@@ -72,4 +66,4 @@ const Todo = (props: ItemProps) => {
   );
 };
 
-export default Todo
+export default Todo;

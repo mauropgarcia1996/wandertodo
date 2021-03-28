@@ -61,12 +61,13 @@ function App() {
         <button onClick={() => setShowModal(!showModal)}>Add Book</button>
         {todos ? (
           todos.map((todo) => (
-            <Todo key={todo.name} name={todo.name} done={true} />
+            <Todo key={todo.name} name={todo.name} description={todo.description} done={todo.done} />
           ))
         ) : (
           <p>No ToDos</p>
         )}
       </div>
+      {/* MODALES */}
       <div
         className={`bg-gray-900 opacity-75 w-full h-full absolute object-center flex justify-center items-center ${
           showModal ? "block" : "hidden"
