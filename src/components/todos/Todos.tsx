@@ -42,7 +42,7 @@ const Todos: React.FunctionComponent = () => {
         done: false,
       })
       .then((docRef) => {
-        location.reload();
+        window.location.reload();
       })
       .catch((err) => console.log(err));
   };
