@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Todo from "./Todo";
-import Modal from "../Modal"
+import Modal from "../Modal";
 import { db } from "../../firebase/config";
-import loaderIcon from "../../assets/icons/loader.svg"
+import loaderIcon from "../../assets/icons/loader.svg";
 
 interface ITodo {
   id: string;
@@ -25,7 +25,7 @@ const Todos: React.FunctionComponent = () => {
       .get()
       .then((querySnapshot) => {
         const todos: ITodo[] = [];
-        querySnapshot.forEach((doc) => {          
+        querySnapshot.forEach((doc) => {
           todos.push({
             id: doc.id,
             name: doc.data().name,
@@ -34,7 +34,7 @@ const Todos: React.FunctionComponent = () => {
           });
         });
         setTodos(todos);
-        setLoading(false)
+        setLoading(false);
       });
   };
 
@@ -47,39 +47,41 @@ const Todos: React.FunctionComponent = () => {
         done: false,
       })
       .then((docRef) => {
-        console.log(docRef)
+        console.log(docRef);
         getData();
-        setShowModal(!showModal)
+        setShowModal(!showModal);
         // window.location.reload();
       })
       .catch((err) => console.log(err));
   };
 
   const completeTodo = (id: string, done: boolean) => {
-    setLoading(true)
-    db.collection("todos").doc(id).update({done: !done})
-    .then(() => {
-      console.log('Doc Updated')
-      getData();
-    })
-    .catch((err) => {
-      console.log(err);
-      
-    })
-  }
+    setLoading(true);
+    db.collection("todos")
+      .doc(id)
+      .update({ done: !done })
+      .then(() => {
+        console.log("Doc Updated");
+        getData();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const deleteTodo = (id: string) => {
-    setLoading(true)
-    db.collection("todos").doc(id).delete()
-    .then(() => {
-      console.log('Doc Deleted')
-      getData();
-    })
-    .catch((err) => {
-      console.log(err);
-      
-    })
-  }
+    setLoading(true);
+    db.collection("todos")
+      .doc(id)
+      .delete()
+      .then(() => {
+        console.log("Doc Deleted");
+        getData();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className="h-full w-full flex flex-col justify-center items-center px-2 sm:px-20">
@@ -96,7 +98,17 @@ const Todos: React.FunctionComponent = () => {
           />
         ))
       ) : (
-        <p>{loading ? <img className="animate-spin spin-slow" src={loaderIcon} /> : 'No Data'}</p>
+        <p>
+          {loading ? (
+            <img
+              className="animate-spin spin-slow"
+              alt="loader-icon"
+              src={loaderIcon}
+            />
+          ) : (
+            "No Data"
+          )}
+        </p>
       )}
       {/* MODALES */}
       <Modal
