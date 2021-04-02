@@ -17,7 +17,7 @@ export interface IUserProps {
 
 export const AuthContext = createContext<IUserProps>({
     user: null,
-    updateUser: (user: IUser) => {},
+    updateUser: (user: IUser) => user
 })
 
 export const AuthContextConsumer = AuthContext.Consumer;

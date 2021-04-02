@@ -17,7 +17,7 @@ const LoginButton: React.FC = () => {
       .then((result) => {
         // Handle user, token, data, etc...
         const credential = result.credential as firebase.auth.OAuthCredential;
-        let newUser = {
+        const newUser = {
           displayName: result.user?.displayName,
           email: result.user?.email,
           photoURL: result.user?.photoURL,
@@ -31,6 +31,7 @@ const LoginButton: React.FC = () => {
       })
       .catch((error) => {
         // Handle error...
+        console.log(error)
       });
   };
 

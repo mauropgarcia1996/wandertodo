@@ -1,19 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
+import firebase from "firebase"
+
 import Todos from "./components/todos/Todos";
 import Sidebar from "./components/Sidebar";
 import LoginButton from "./components/LoginButton";
-import AuthContext, { AuthContextProvider, IUser } from "./context/authContext/AuthContext";
+import AuthContext, {
+  AuthContextProvider,
+  IUser,
+} from "./context/authContext/AuthContext";
 
 const Home: React.FunctionComponent = () => {
-  const authContext = useContext(AuthContext)
-  const [user, setUser] = useState<IUser | null>(null)
+  const authContext = useContext(AuthContext);
+  const [user, setUser] = useState<IUser | null>(null);
 
   useEffect(() => {
-    setUser(authContext.user)
-  }, [authContext])
-
+    setUser(authContext.user);
+  }, [authContext]);
 
   return <div>{user?.displayName}</div>;
 };
@@ -21,7 +25,7 @@ const Home: React.FunctionComponent = () => {
 function App() {
   const [user, setUser] = useState<IUser | null>(null);
 
-  const updateUser = (_user: IUser) => {
+  const updateUser = (_user: IUser | null) => {
     setUser(_user);
   };
 
@@ -29,6 +33,17 @@ function App() {
     user,
     updateUser,
   };
+
+  const signOut = () => {
+    firebase.auth().signOut()
+    .then(() => {
+      console.log('logged out')
+      updateUser(null)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
 
   return (
     <AuthContextProvider value={authContextValues}>
@@ -50,7 +65,14 @@ function App() {
           </Sidebar>
           <div className="h-full w-full">
             <div className="h-14 w-full flex flex-row-reverse px-2 py-1">
-              <LoginButton />
+              {user ? (
+                <div>
+                  <p>{user.displayName}</p>
+                  <button onClick={signOut}>Sign Out</button>
+                </div>
+              ) : (
+                <LoginButton />
+              )}
             </div>
             <Switch>
               <Route exact path="/">
