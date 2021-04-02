@@ -11,7 +11,7 @@ const Sidebar: React.FunctionComponent<SidebarProps> = (
 
   return (
     <div
-      className={`sidebar flex flex-col items-center h-full ${
+      className={`sidebar flex flex-col items-center h-full shadow-xl ${
         open ? "w-20 sm:w-48" : "w-16 sm:w-20"
       }`}
     >

@@ -25,7 +25,7 @@ const Modal: React.FunctionComponent<ModalProps> = (props: ModalProps) => {
         }`}
       >
         <div
-          className={`absolute object-center bg-red-400 px-5 py-2 w-5/12 rounded-lg`}
+          className={`absolute object-center bg-red-400 px-5 py-2 w-8/12 md:w-5/12 rounded-lg`}
         >
           <div className="w-100 flex flex-row-reverse">
             <button
