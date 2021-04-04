@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
+import PrivateRoute from "./security/ProtectedRoute";
 
-import firebase from "firebase"
+import firebase from "firebase";
 
 import Todos from "./components/todos/Todos";
 import Sidebar from "./components/Sidebar";
@@ -22,6 +23,20 @@ const Home: React.FunctionComponent = () => {
   return <div>{user?.displayName}</div>;
 };
 
+const Login: React.FunctionComponent = () => {
+  const authContext = useContext(AuthContext);
+  return authContext.user ? (
+    <Redirect
+      to={{
+        pathname: "/todos",
+        state: { from: "/login" },
+      }}
+    />
+  ) : (
+    <div>PLEASE LOG IN</div>
+  );
+};
+
 function App() {
   const [user, setUser] = useState<IUser | null>(null);
 
@@ -35,27 +50,23 @@ function App() {
   };
 
   const signOut = () => {
-    firebase.auth().signOut()
-    .then(() => {
-      console.log('logged out')
-      updateUser(null)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  }
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        console.log("logged out");
+        updateUser(null);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <AuthContextProvider value={authContextValues}>
       <Router>
         <div className="App h-screen flex">
           <Sidebar>
-            <Link
-              className="hover:bg-red-400 transform duration-300 font-medium ease-in-out my-2 rounded-md w-3/4 text-center py-2"
-              to="/login"
-            >
-              Login
-            </Link>
             <Link
               className="hover:bg-red-400 transform duration-300 font-medium ease-in-out my-2 rounded-md w-3/4 text-center py-2"
               to="/todos"
@@ -78,9 +89,10 @@ function App() {
               <Route exact path="/">
                 <Home />
               </Route>
-              <Route path="/todos">
-                <Todos />
+              <Route exact path="/login">
+                <Login />
               </Route>
+              <PrivateRoute path="/todos" component={<Todos />} />
             </Switch>
           </div>
         </div>

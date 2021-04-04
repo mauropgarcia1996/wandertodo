@@ -24,7 +24,7 @@ const LoginButton: React.FC = () => {
           accessToken: credential.accessToken,
           idToken: credential.idToken,
           refreshToken: result.user?.refreshToken,
-          uui: result.user?.uid,
+          uuid: result.user?.uid,
         };
 
         authContext.updateUser(newUser);

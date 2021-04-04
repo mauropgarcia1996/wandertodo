@@ -7,7 +7,7 @@ export interface IUser {
     accessToken: string | null | undefined,
     idToken: string | null | undefined,
     refreshToken: string | null | undefined,
-    uui: string | null | undefined
+    uuid: string | null | undefined
 }
 
 export interface IUserProps {

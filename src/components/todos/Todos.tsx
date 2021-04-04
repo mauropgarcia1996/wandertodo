@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Todo from "./Todo";
 import Modal from "../Modal";
 import { db } from "../../firebase/config";
 import loaderIcon from "../../assets/icons/loader.svg";
+import AuthContext from "../../context/authContext/AuthContext";
 
 interface ITodo {
   id: string;
@@ -13,6 +14,7 @@ interface ITodo {
 
 const Todos: React.FunctionComponent = () => {
   const [loading, setLoading] = useState(true);
+  const authContext = useContext(AuthContext);
   const [todos, setTodos] = useState<ITodo[] | null>(null);
   const [showModal, setShowModal] = useState(false);
 
@@ -22,6 +24,7 @@ const Todos: React.FunctionComponent = () => {
 
   const getData = () => {
     db.collection("todos")
+      .where("user", "==", authContext.user?.uuid)
       .get()
       .then((querySnapshot) => {
         const todos: ITodo[] = [];
@@ -42,6 +45,7 @@ const Todos: React.FunctionComponent = () => {
     e.preventDefault();
     db.collection("todos")
       .add({
+        user: authContext.user?.uuid,
         name: name,
         description: description,
         done: false,
