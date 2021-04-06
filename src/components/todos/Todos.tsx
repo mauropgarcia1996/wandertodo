@@ -18,6 +18,11 @@ const Todos: React.FunctionComponent = () => {
   const [todos, setTodos] = useState<ITodo[] | null>(null);
   const [showModal, setShowModal] = useState(false);
 
+  useEffect(() => {
+    getData();
+    /* eslist-disable react-hooks/exhaustive-deps */
+  }, []);
+
   const getData = () => {
     db.collection("todos")
       .where("user", "==", authContext.user?.uuid)
@@ -36,12 +41,6 @@ const Todos: React.FunctionComponent = () => {
         setLoading(false);
       });
   };
-  
-  useEffect(() => {
-    getData();
-  }, [getData]);
-
-  
 
   const addData = (e: React.FormEvent, name: string, description: string) => {
     e.preventDefault();
