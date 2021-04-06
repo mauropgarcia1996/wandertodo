@@ -18,26 +18,6 @@ const Todos: React.FunctionComponent = () => {
   const [todos, setTodos] = useState<ITodo[] | null>(null);
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    db.collection("todos")
-      .where("user", "==", authContext.user?.uuid)
-      .get()
-      .then((querySnapshot) => {
-        const todos: ITodo[] = [];
-        querySnapshot.forEach((doc) => {
-          todos.push({
-            id: doc.id,
-            name: doc.data().name,
-            description: doc.data().description,
-            done: doc.data().done,
-          });
-        });
-        setTodos(todos);
-        setLoading(false);
-      });
-
-  }, []);
-
   const getData = () => {
     db.collection("todos")
       .where("user", "==", authContext.user?.uuid)
@@ -56,6 +36,12 @@ const Todos: React.FunctionComponent = () => {
         setLoading(false);
       });
   };
+  
+  useEffect(() => {
+    getData();
+  }, [getData]);
+
+  
 
   const addData = (e: React.FormEvent, name: string, description: string) => {
     e.preventDefault();
