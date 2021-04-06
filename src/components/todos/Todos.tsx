@@ -20,7 +20,7 @@ const Todos: React.FunctionComponent = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [authContext]);
 
   const getData = () => {
     db.collection("todos")
