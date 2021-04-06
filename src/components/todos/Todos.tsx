@@ -20,7 +20,7 @@ const Todos: React.FunctionComponent = () => {
 
   useEffect(() => {
     getData();
-    /* eslist-disable react-hooks/exhaustive-deps */
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getData = () => {
