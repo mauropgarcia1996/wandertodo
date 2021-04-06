@@ -19,27 +19,26 @@ const Todos: React.FunctionComponent = () => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    getData();
-  }, [authContext]);
-
-  const getData = () => {
-    db.collection("todos")
-      .where("user", "==", authContext.user?.uuid)
-      .get()
-      .then((querySnapshot) => {
-        const todos: ITodo[] = [];
-        querySnapshot.forEach((doc) => {
-          todos.push({
-            id: doc.id,
-            name: doc.data().name,
-            description: doc.data().description,
-            done: doc.data().done,
+    const getData = () => {
+      db.collection("todos")
+        .where("user", "==", authContext.user?.uuid)
+        .get()
+        .then((querySnapshot) => {
+          const todos: ITodo[] = [];
+          querySnapshot.forEach((doc) => {
+            todos.push({
+              id: doc.id,
+              name: doc.data().name,
+              description: doc.data().description,
+              done: doc.data().done,
+            });
           });
+          setTodos(todos);
+          setLoading(false);
         });
-        setTodos(todos);
-        setLoading(false);
-      });
-  };
+    };
+    getData();
+  }, []);
 
   const addData = (e: React.FormEvent, name: string, description: string) => {
     e.preventDefault();
