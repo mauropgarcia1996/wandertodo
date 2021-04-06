@@ -19,26 +19,43 @@ const Todos: React.FunctionComponent = () => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    const getData = () => {
-      db.collection("todos")
-        .where("user", "==", authContext.user?.uuid)
-        .get()
-        .then((querySnapshot) => {
-          const todos: ITodo[] = [];
-          querySnapshot.forEach((doc) => {
-            todos.push({
-              id: doc.id,
-              name: doc.data().name,
-              description: doc.data().description,
-              done: doc.data().done,
-            });
+    db.collection("todos")
+      .where("user", "==", authContext.user?.uuid)
+      .get()
+      .then((querySnapshot) => {
+        const todos: ITodo[] = [];
+        querySnapshot.forEach((doc) => {
+          todos.push({
+            id: doc.id,
+            name: doc.data().name,
+            description: doc.data().description,
+            done: doc.data().done,
           });
-          setTodos(todos);
-          setLoading(false);
         });
-    };
-    getData();
+        setTodos(todos);
+        setLoading(false);
+      });
+
   }, []);
+
+  const getData = () => {
+    db.collection("todos")
+      .where("user", "==", authContext.user?.uuid)
+      .get()
+      .then((querySnapshot) => {
+        const todos: ITodo[] = [];
+        querySnapshot.forEach((doc) => {
+          todos.push({
+            id: doc.id,
+            name: doc.data().name,
+            description: doc.data().description,
+            done: doc.data().done,
+          });
+        });
+        setTodos(todos);
+        setLoading(false);
+      });
+  };
 
   const addData = (e: React.FormEvent, name: string, description: string) => {
     e.preventDefault();
@@ -53,7 +70,6 @@ const Todos: React.FunctionComponent = () => {
         console.log(docRef);
         getData();
         setShowModal(!showModal);
-        // window.location.reload();
       })
       .catch((err) => console.log(err));
   };
