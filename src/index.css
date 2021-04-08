@@ -2,16 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-
-.App {
-    background-color: #F3F4ED;
-}
-
 .sidebar {
-    background-color: #046582;
+    background-color: #21212a;
     transition: width 0.5s;
 }
 
+.sidebar-link:hover {
+    background-color: #272731;
+}
+
+.sidebar-link-active {
+    background-color: #272731;
+}
+
+.main-bg {
+    background-color: #18181f;
+}
+
 .todo-item{
-    background-color: #F39189;
+    background-color: #272731
+}
+
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open{
+    opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+    opacity: 0;
+}
+
+button:focus {
+    outline: none;
 }

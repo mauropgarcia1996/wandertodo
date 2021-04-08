@@ -11,13 +11,14 @@ const Sidebar: React.FunctionComponent<SidebarProps> = (
 
   return (
     <div
-      className={`sidebar flex flex-col items-center h-full shadow-xl ${
+      className={`sidebar flex flex-col items-center h-full text-gray-100 shadow-xl ${
         open ? "w-20 sm:w-48" : "w-16 sm:w-20"
       }`}
     >
       <button
         className="w-full flex justify-end mb-10 mt-2 outline-none"
         onClick={() => setOpen(!open)}
+        disabled={true}
       >
         <div className="h-8 w-8 mx-5">
           {open ? (

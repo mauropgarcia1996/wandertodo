@@ -10,7 +10,7 @@ interface ItemProps {
 
 const Todo: React.FunctionComponent<ItemProps> = (props: ItemProps) => {
   return (
-    <div className="todo-item grid grid-cols-12 w-full lg:max-w-3xl py-2 h-16 rounded-3xl shadow-lg my-2 transform duration-300 sm:hover:scale-105">
+    <div className="todo-item grid grid-cols-12 w-full lg:max-w-3xl py-2 h-16 rounded-2xl shadow-lg my-2 transform duration-300 sm:hover:scale-105">
       <div className="col-span-2 flex justify-center items-center">
         <div className="h-4 w-4 sm:h-8 sm:w-8">
           {props.done ? (
@@ -58,8 +58,8 @@ const Todo: React.FunctionComponent<ItemProps> = (props: ItemProps) => {
             {props.description}
           </p>
         </div>
-        <div className="col-span-6 px-4 sm:col-span-4">
-          <div className="flex items-center justify-between sm:mx-4">
+        <div className="col-span-6 px-1 sm:col-span-4">
+          <div className="flex items-center justify-end sm:mx-4">
             <p className="font-medium text-xs">12/03/2021</p>
             <div className="h-4 w-4 md:mx-2">
               <svg
