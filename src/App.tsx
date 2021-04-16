@@ -1,11 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import PrivateRoute from "./security/ProtectedRoute";
 
 import firebase from "firebase";
@@ -128,11 +122,15 @@ function App() {
             <div className="h-14 w-full flex flex-row-reverse px-2 py-1">
               {user ? (
                 <div className="flex items-center mx-2">
-                  <img
-                    className="mx-5 rounded-full"
-                    src={user.photoURL!}
-                    style={{ width: "32px", height: "32px" }}
-                  />
+                  {user.photoURL ? (
+                    <img
+                      className="mx-5 rounded-full"
+                      src={user.photoURL}
+                      style={{ width: "32px", height: "32px" }}
+                    />
+                  ) : (
+                    ""
+                  )}
                   <button onClick={signOut}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
