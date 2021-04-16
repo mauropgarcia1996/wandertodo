@@ -126,6 +126,7 @@ function App() {
                     <img
                       className="mx-5 rounded-full"
                       src={user.photoURL}
+                      alt="googleUserPhoto"
                       style={{ width: "32px", height: "32px" }}
                     />
                   ) : (
